@@ -10,7 +10,8 @@ export default function styleConstructor(theme={}) {
       flex: 1,
       alignItems: 'center',
       alignSelf: 'stretch',
-      marginLeft: -1
+      marginLeft: -1,
+      justifyContent: 'center',
     },
     base: {
       //borderWidth: 1,

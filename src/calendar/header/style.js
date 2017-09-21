@@ -6,10 +6,10 @@ export default function(theme={}) {
   return StyleSheet.create({
     header: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
-      paddingLeft: 10,
-      paddingRight: 10,
-      alignItems: 'center'
+      justifyContent: appStyle.headerJustify,
+      paddingLeft: appStyle.headerPaddingLeft,
+      paddingRight: appStyle.headerPaddingRight,
+      alignItems: 'center',
     },
     monthText: {
       fontSize: appStyle.textMonthFontSize,
@@ -34,12 +34,12 @@ export default function(theme={}) {
     week: {
       marginTop: 7,
       flexDirection: 'row',
-      justifyContent: 'space-around'
+      justifyContent: 'space-between',
     },
     dayHeader: {
       marginTop: 2,
       marginBottom: 7,
-      width: 32,
+      flex: 1,
       textAlign: 'center',
       fontSize: appStyle.textDayHeaderFontSize,
       fontFamily: appStyle.textDayHeaderFontFamily,

@@ -233,6 +233,7 @@ class Calendar extends Component {
           renderArrow={this.props.renderArrow}
           monthFormat={this.props.monthFormat}
           hideDayNames={this.props.hideDayNames}
+          onMonthPress={this.props.onMonthPress}
         />
         {weeks}
       </View>);

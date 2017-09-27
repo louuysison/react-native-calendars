@@ -11,7 +11,7 @@ import dateutils from '../dateutils';
 import Calendar from '../calendar';
 import CalendarListItem from './item';
 
-const calendarHeight = 360;
+const calendarHeight = 300;
 class CalendarList extends Component {
   static propTypes = {
     ...Calendar.propTypes,
@@ -157,10 +157,8 @@ class CalendarList extends Component {
         ref={(c) => this.listView = c}
         //scrollEventThrottle={1000}
         style={[this.style.container, this.props.style]}
-        initialListSize={this.pastScrollRange * this.futureScrollRange + 1}
+        initialListSize={this.pastScrollRange + this.futureScrollRange + 1}
         data={this.state.rows}
-        //snapToAlignment='start'
-        //snapToInterval={calendarHeight}
         removeClippedSubviews={Platform.OS === 'android' ? false : true}
         pageSize={1}
         onViewableItemsChanged={this.onViewableItemsChanged.bind(this)}

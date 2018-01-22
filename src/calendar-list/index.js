@@ -11,7 +11,6 @@ import dateutils from '../dateutils';
 import Calendar from '../calendar';
 import CalendarListItem from './item';
 
-const calendarHeight = 300;
 class CalendarList extends Component {
   static propTypes = {
     ...Calendar.propTypes,
@@ -58,7 +57,7 @@ class CalendarList extends Component {
   scrollToDay(d, offset, animated) {
     const day = parseDate(d);
     const diffMonths = Math.round(this.state.openDate.clone().setDate(1).diffMonths(day.clone().setDate(1)));
-    let scrollAmount = (calendarHeight * this.pastScrollRange) + (diffMonths * calendarHeight) + (offset || 0);
+    let scrollAmount = (this.props.calendarHeight * this.pastScrollRange) + (diffMonths * this.props.calendarHeight) + (offset || 0);
     let week = 0;
     const days = dateutils.page(day, this.props.firstDay);
     for (let i = 0; i < days.length; i++) {
@@ -76,7 +75,7 @@ class CalendarList extends Component {
     const scrollTo = month || this.state.openDate;
     let diffMonths = this.state.openDate.diffMonths(scrollTo);
     diffMonths = diffMonths < 0 ? Math.ceil(diffMonths) : Math.floor(diffMonths);
-    const scrollAmount = (calendarHeight * this.pastScrollRange) + (diffMonths * calendarHeight);
+    const scrollAmount = (this.props.calendarHeight * this.pastScrollRange) + (diffMonths * this.props.calendarHeight);
     //console.log(month, this.state.openDate);
     //console.log(scrollAmount, diffMonths);
     this.listView.scrollToOffset({offset: scrollAmount, animated: false});
@@ -139,10 +138,10 @@ class CalendarList extends Component {
   }
 
   renderCalendar({item}) {
-    return (<CalendarListItem item={item} calendarHeight={calendarHeight} {...this.props} />);
+    return (<CalendarListItem item={item} {...this.props} />);
   }
 
-  getItemLayout(data, index) {
+  getItemLayout(data, index, calendarHeight) {
     return {length: calendarHeight, offset: calendarHeight * index, index};
   }
 
@@ -167,7 +166,7 @@ class CalendarList extends Component {
         scrollEnabled={this.props.scrollingEnabled !== undefined ? this.props.scrollingEnabled : true}
         keyExtractor={(item, index) => index}
         initialScrollIndex={this.state.openDate ? this.getMonthIndex(this.state.openDate) : false}
-        getItemLayout={this.getItemLayout}
+        getItemLayout={(data, index) => this.getItemLayout(data, index, this.props.calendarHeight)}
       />
     );
   }
